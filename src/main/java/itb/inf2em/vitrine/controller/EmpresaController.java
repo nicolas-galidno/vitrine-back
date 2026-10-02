@@ -22,13 +22,11 @@ public class EmpresaController {
         Empresas e1 = new Empresas();
         e1.setNome("Pizzaria do Fredao");
         e1.setCategoria("Pizzaria");
-        e1.setNicho("Alimentacao");
         empresas.add(e1);
 
         Empresas e2 = new Empresas();
         e2.setNome("Tech Solutions");
         e2.setCategoria("Tecnologia");
-        e2.setNicho("Desenvolvimento de Software");
         empresas.add(e2);
 
         return empresas;

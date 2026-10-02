@@ -3,7 +3,6 @@ package itb.inf2em.vitrine.model.entity;
 public class Categoria {
     private Long id;
     private String nome;
-    private String nicho;
     private boolean codStatus;
 
     public Long getId() {
@@ -21,15 +20,6 @@ public class Categoria {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getNicho() {
-        return nicho;
-    }
-
-    public void setNicho(String nicho) {
-        this.nicho = nicho;
-    }
-
 
     public boolean isCodStatus() {
         return codStatus;

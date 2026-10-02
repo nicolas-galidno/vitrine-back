@@ -1,34 +1,59 @@
 package itb.inf2em.vitrine.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jakarta.persistence.*;
 
 @JsonPropertyOrder({
         "id",
         "nome",
         "cnpj",
         "categoria",
-        "nicho",
-        "telefone",
         "email",
         "logradouro",
         "estado",
-        "bairro",
         "cidade",
         "codStatus"
 })
+
+@Entity
+@Table(name = "Empresas")
 public class Empresas {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 100, nullable = false)
     private String nome;
+
+    @Column(length = 14, nullable = false)
     private String cnpj;
-    private String categoria;
-    private String nicho;
-    private String telefone;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
+    @Column(length = 300)
+    private String descricao;
+
+    @Column(length = 45, nullable = false)
     private String email;
+
+    @Column(length = 255, nullable = false)
+    private String senha;
+
+    @Column(length = 50, nullable = false)
     private String logradouro;
-    private String estado;
-    private String bairro;
-    private String cidade;
+
+    @ManyToOne
+    @JoinColumn(name = "estado_id")
+    private Estado estado;
+
+    @ManyToOne
+    @JoinColumn(name = "cidade_id")
+    private Cidade cidade;
+
+    @Column(name = "cod_status", nullable = false)
     private boolean codStatus;
 
     public Long getId() {
@@ -55,28 +80,20 @@ public class Empresas {
         this.cnpj = cnpj;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
-    public String getNicho() {
-        return nicho;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setNicho(String nicho) {
-        this.nicho = nicho;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getEmail() {
@@ -87,6 +104,14 @@ public class Empresas {
         this.email = email;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public String getLogradouro() {
         return logradouro;
     }
@@ -95,27 +120,19 @@ public class Empresas {
         this.logradouro = logradouro;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getCidade() {
+    public Cidade getCidade() {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
 
