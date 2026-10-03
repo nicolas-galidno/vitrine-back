@@ -45,9 +45,6 @@ public class Empresas {
     @Column(length = 50, nullable = false)
     private String logradouro;
 
-    @ManyToOne
-    @JoinColumn(name = "estado_id")
-    private Estado estado;
 
     @ManyToOne
     @JoinColumn(name = "cidade_id")
@@ -118,14 +115,6 @@ public class Empresas {
 
     public void setLogradouro(String logradouro) {
         this.logradouro = logradouro;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
     }
 
     public Cidade getCidade() {

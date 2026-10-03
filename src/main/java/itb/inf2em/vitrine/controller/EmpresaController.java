@@ -1,11 +1,13 @@
 package itb.inf2em.vitrine.controller;
 
 import itb.inf2em.vitrine.model.entity.Empresas;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import itb.inf2em.vitrine.model.services.EmpresasService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -14,24 +16,22 @@ import java.util.List;
 @RequestMapping( "/api/v1/empresas")
 public class EmpresaController {
 
-   List<Empresas> empresas = new ArrayList<Empresas>();
+    @Autowired
+    private EmpresasService empresasService;
+
 
     @GetMapping
-    public List<Empresas> findAll() {
+    public ResponseEntity<List<Empresas>> listarTodos() {
 
-        Empresas e1 = new Empresas();
-        e1.setNome("Pizzaria do Fredao");
-        e1.setCategoria("Pizzaria");
-        empresas.add(e1);
-
-        Empresas e2 = new Empresas();
-        e2.setNome("Tech Solutions");
-        e2.setCategoria("Tecnologia");
-        empresas.add(e2);
-
-        return empresas;
+        return ResponseEntity.ok(empresasService.findAll());
     }
 
+    @PostMapping
+    public ResponseEntity<Empresas> salvarEmpresas(@RequestBody Empresas empresas) {
+
+        Empresas novo = empresasService.save(empresas);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novo);
+    }
 
 
 }

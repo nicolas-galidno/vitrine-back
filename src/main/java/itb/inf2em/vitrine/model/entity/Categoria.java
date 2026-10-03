@@ -1,8 +1,19 @@
 package itb.inf2em.vitrine.model.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Categoria")
 public class Categoria {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 45, nullable = false)
     private String nome;
+
+    @Column(name = "cod_status", nullable = false)
     private boolean codStatus;
 
     public Long getId() {
@@ -20,6 +31,7 @@ public class Categoria {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 
     public boolean isCodStatus() {
         return codStatus;

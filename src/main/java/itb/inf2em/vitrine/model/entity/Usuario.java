@@ -1,14 +1,24 @@
 package itb.inf2em.vitrine.model.entity;
 
-public class Usuarios {
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Usuario")
+public class Usuario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 100, nullable = false)
     private String nome;
-    private String cpf;
-    private String sexo;
-    private String telefone;
+
+    @Column(length = 100, nullable = false)
     private String email;
-    private String tipo;
+
+    @Column(name = "cod_status", nullable = false)
     private boolean codStatus;
+
 
     public Long getId() {
         return id;
@@ -26,29 +36,6 @@ public class Usuarios {
         this.nome = nome;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
 
     public String getEmail() {
         return email;
@@ -56,14 +43,6 @@ public class Usuarios {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
     }
 
     public boolean isCodStatus() {
@@ -74,3 +53,4 @@ public class Usuarios {
         this.codStatus = codStatus;
     }
 }
+

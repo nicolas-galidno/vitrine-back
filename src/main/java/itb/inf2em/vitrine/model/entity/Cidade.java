@@ -1,10 +1,9 @@
 package itb.inf2em.vitrine.model.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Audited;
 
 @Entity
-@Audited.Table(name = "Cidade")
+@Table(name = "Cidade")
 public class Cidade {
 
     @Id
@@ -15,7 +14,7 @@ public class Cidade {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "estado_id", nullable = false)
+    @JoinColumn(name = "estado_sigla", referencedColumnName = "sigla")
     private Estado estado;
 
     public Long getId() {

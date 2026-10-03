@@ -2,7 +2,6 @@ package itb.inf2em.vitrine.model.entity;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "Estado")
 public class Estado {
@@ -14,7 +13,7 @@ public class Estado {
     @Column(length = 50, nullable = false)
     private String nome;
 
-    @Column(length = 2, nullable = false)
+    @Column(length = 2, nullable = false, unique = true)
     private String sigla;
 
     public Long getId() {

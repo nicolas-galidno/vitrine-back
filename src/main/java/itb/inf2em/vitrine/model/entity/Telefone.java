@@ -1,9 +1,22 @@
 package itb.inf2em.vitrine.model.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Telefone")
 public class Telefone {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 3, nullable = false)
     private String ddd;
+
+    @Column(length = 11, nullable = false)
     private String numero;
+
+    @Column(name = "codStatus", nullable = false)
     private boolean codStatus;
 
     public Long getId() {
