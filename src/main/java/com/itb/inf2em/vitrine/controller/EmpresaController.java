@@ -65,7 +65,7 @@ public class EmpresaController {
                     Map.of(
                             "status", 400,
                             "error", "Bad Request",
-                            "message", "o Id informado não é válido:" + id
+                            "message", "Erro de formatação para o id:" + id
                     )
             );
         }catch (RuntimeException e){
@@ -88,14 +88,14 @@ public class EmpresaController {
                     Map.of(
                             "status", 200,
                             "message",
-                            "Produto excluído com sucesso!")
+                            "Empresa excluído com sucesso!")
             );
         }catch (NumberFormatException e) {
             return ResponseEntity.badRequest().body(
                     Map.of(
                             "status", 400,
-                            "error", "Not found",
-                            "message", "Empresa não encontrada com o id:" + id
+                            "error", "Bad Request",
+                            "message", "Erro de formatação para o id:" + id
                     )
             );
         } catch (RuntimeException e){

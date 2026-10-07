@@ -18,7 +18,7 @@ public class CategoriaService {
     }
 
     public Categoria save(Categoria categoria){
-        categoria.setCodStatus(true);
+
         return categoriaRepository.save(categoria);
     }
 }

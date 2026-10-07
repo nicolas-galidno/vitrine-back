@@ -1,6 +1,22 @@
 package com.itb.inf2em.vitrine.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
+import jakarta.persistence.metamodel.Type;
+import org.hibernate.annotations.Cascade;
+
+import java.util.List;
+
+@JsonPropertyOrder({
+        "id",
+        "nome",
+        "email",
+        "telefones",
+        "codStatus"
+})
+
+
 
 @Entity
 @Table(name = "Usuario")
@@ -15,6 +31,12 @@ public class Usuario {
 
     @Column(length = 100, nullable = false)
     private String email;
+
+    @Column(length = 255, nullable = false)
+    private String senha;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Telefone> telefones;
 
     @Column(name = "cod_status", nullable = false)
     private boolean codStatus;
@@ -36,6 +58,21 @@ public class Usuario {
         this.nome = nome;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
 
     public String getEmail() {
         return email;

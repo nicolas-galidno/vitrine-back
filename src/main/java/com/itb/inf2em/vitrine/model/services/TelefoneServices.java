@@ -17,7 +17,25 @@ public class TelefoneServices {
     }
 
     public Telefone save(Telefone telefone){
-        telefone.setCodStatus(true);
         return telefoneRepository.save(telefone);
+    }
+
+    public Telefone findById(Long id){
+        return telefoneRepository.findById(id)
+                .orElseThrow(() ->new RuntimeException("Usuario não encontrado" + id));
+    }
+
+    public Telefone update(long l, Telefone telefone){
+        Telefone telefoneExistente = findById(telefone.getId());
+        telefoneExistente.setDdd(telefone.getDdd());
+        telefoneExistente.setEmpresa(telefone.getEmpresa());
+        telefoneExistente.setUsuario(telefone.getUsuario());
+        telefoneExistente.setNumero(telefone.getNumero());
+        return telefoneRepository.save(telefoneExistente);
+    }
+
+    public void delete(Long id){
+        Telefone telefone = findById(id);
+        telefoneRepository.deleteById(id);
     }
 }

@@ -3,12 +3,16 @@ package com.itb.inf2em.vitrine.model.entity;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @JsonPropertyOrder({
         "id",
         "nome",
         "cnpj",
-        "categoria",
         "email",
+        "senha",
+        "telefones",
+        "categoria",
         "logradouro",
         "estado",
         "cidade",
@@ -28,6 +32,9 @@ public class Empresas {
 
     @Column(length = 14, nullable = false)
     private String cnpj;
+
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    private List<Telefone> telefones;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
@@ -83,6 +90,14 @@ public class Empresas {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
     }
 
     public String getDescricao() {

@@ -1,6 +1,7 @@
 package com.itb.inf2em.vitrine.model.services;
 
 import com.itb.inf2em.vitrine.model.entity.Empresas;
+import com.itb.inf2em.vitrine.model.entity.Telefone;
 import com.itb.inf2em.vitrine.model.repository.EmpresasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,10 @@ public class EmpresasService {
     public List<Empresas> findAll() { return empresasRepository.findAll();}
 
     public Empresas save(Empresas empresas){
+        List<Telefone> telefones = empresas.getTelefones();
+        telefones.forEach(telefone ->{
+            telefone.setEmpresa(empresas);
+        });
         empresas.setCodStatus(true);
         return empresasRepository.save(empresas);
     }
@@ -33,6 +38,7 @@ public class EmpresasService {
         empresaExistente.setDescricao(empresas.getDescricao());
         empresaExistente.setEmail(empresas.getEmail());
         empresaExistente.setSenha(empresas.getSenha());
+        empresaExistente.setTelefones(empresas.getTelefones());
         empresaExistente.setLogradouro(empresas.getLogradouro());
         empresaExistente.setCidade(empresas.getCidade());
         empresaExistente.setCodStatus(empresas.isCodStatus());

@@ -17,7 +17,6 @@ GO
 CREATE TABLE Categoria (
     id BIGINT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     nome VARCHAR(45) NOT NULL,
-    cod_status BIT NOT NULL
 );
 GO
 
@@ -84,50 +83,18 @@ CREATE TABLE Usuario (
 );
 GO
 
-
-
-
 CREATE TABLE Telefone (
-    id BIGINT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    numero VARCHAR(11) NOT NULL,
-    ddd VARCHAR(3) NULL,
-    cod_status BIT NOT NULL
-);
-GO
+    id BIGINT IDENTITY(1,1) PRIMARY KEY,
+    ddd VARCHAR(3) NOT NULL,
+    numero VARCHAR(8) NOT NULL,
+    usuario_id BIGINT NULL,
+    empresa_id BIGINT NULL,
 
-
-
-
-CREATE TABLE Usuario_Telefone (
-    usuario_id BIGINT NOT NULL,
-    telefone_id BIGINT NOT NULL,
-
-    PRIMARY KEY (usuario_id, telefone_id),
-
-    CONSTRAINT fk_usuario_telefone_usuario
+    CONSTRAINT FK_telefone_usuario
         FOREIGN KEY (usuario_id)
-        REFERENCES Usuario(id),
+        REFERENCES usuario(id),
 
-    CONSTRAINT fk_usuario_telefone_telefone
-        FOREIGN KEY (telefone_id)
-        REFERENCES Telefone(id)
-);
-GO
-
-
-
-CREATE TABLE Empresa_Telefone (
-    empresa_id BIGINT NOT NULL,
-    telefone_id BIGINT NOT NULL,
-
-    PRIMARY KEY (empresa_id, telefone_id),
-
-    CONSTRAINT fk_empresa_telefone_empresa
+    CONSTRAINT FK_telefone_empresa
         FOREIGN KEY (empresa_id)
-        REFERENCES Empresas(id),
-
-    CONSTRAINT fk_empresa_telefone_telefone
-        FOREIGN KEY (telefone_id)
-        REFERENCES Telefone(id)
+        REFERENCES Empresas(id)
 );
-GO

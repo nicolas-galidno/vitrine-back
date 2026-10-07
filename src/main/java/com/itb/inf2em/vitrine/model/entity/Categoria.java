@@ -1,7 +1,9 @@
 package com.itb.inf2em.vitrine.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "Categoria")
 public class Categoria {
@@ -13,8 +15,6 @@ public class Categoria {
     @Column(length = 45, nullable = false)
     private String nome;
 
-    @Column(name = "cod_status", nullable = false)
-    private boolean codStatus;
 
     public Long getId() {
         return id;
@@ -32,12 +32,4 @@ public class Categoria {
         this.nome = nome;
     }
 
-
-    public boolean isCodStatus() {
-        return codStatus;
-    }
-
-    public void setCodStatus(boolean codStatus) {
-        this.codStatus = codStatus;
-    }
 }
