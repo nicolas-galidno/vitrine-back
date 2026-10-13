@@ -17,7 +17,4 @@ public class CidadeServices {
         return cidadeRepository.findAll();
     }
 
-    public Cidade save(Cidade cidade){
-        return cidadeRepository.save(cidade);
-    }
 }

@@ -1,7 +1,7 @@
 package com.itb.inf2em.vitrine.model.services;
 
+import com.itb.inf2em.vitrine.model.entity.EmpresaTelefone;
 import com.itb.inf2em.vitrine.model.entity.Empresas;
-import com.itb.inf2em.vitrine.model.entity.Telefone;
 import com.itb.inf2em.vitrine.model.repository.EmpresasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class EmpresasService {
     public List<Empresas> findAll() { return empresasRepository.findAll();}
 
     public Empresas save(Empresas empresas){
-        List<Telefone> telefones = empresas.getTelefones();
+        List<EmpresaTelefone> telefones = empresas.getTelefones();
         telefones.forEach(telefone ->{
             telefone.setEmpresa(empresas);
         });
@@ -27,7 +27,7 @@ public class EmpresasService {
 
     public Empresas findById(Long id){
         return empresasRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Empresa não encontrada com o id" + id));
+                .orElseThrow(()-> new RuntimeException("Empresa não encontrada com o id: " + id));
     }
 
     public Empresas update(Long id, Empresas empresas){
@@ -46,7 +46,8 @@ public class EmpresasService {
     }
 
     public void delete(Long id){
-        Empresas empresaExistente = findById(id);
-        empresasRepository.delete(empresaExistente);
+        if (findById(id) != null) {
+            empresasRepository.deleteById(id);
+        }
     }
 }

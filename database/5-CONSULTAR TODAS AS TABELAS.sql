@@ -6,10 +6,19 @@ GO
 -- ===========================
 
 SELECT * FROM Categoria;
+
+
 SELECT * FROM Empresas;
 SELECT * FROM Usuario;
-SELECT * FROM Telefone;
+ 
+
+SELECT * FROM Empresa_telefone;
+
 SELECT * FROM Estado;
 SELECT * FROM Cidade;
+
+SELECT * FROM Produto;
+SELECT * FROM Servico;
 GO
+
 

@@ -16,7 +16,7 @@ GO
 
 CREATE TABLE Categoria (
     id BIGINT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    nome VARCHAR(45) NOT NULL,
+    nome VARCHAR(45) NOT NULL
 );
 GO
 
@@ -79,22 +79,54 @@ CREATE TABLE Usuario (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
     senha VARCHAR(255) NOT NULL,
-    cod_status BIT NOT NULL
+    cod_status BIT NOT NULL,
+    ddd VARCHAR(2) NOT NULL,
+    numero VARCHAR(9) NOT NULL
+    
 );
 GO
 
-CREATE TABLE Telefone (
-    id BIGINT IDENTITY(1,1) PRIMARY KEY,
-    ddd VARCHAR(3) NOT NULL,
-    numero VARCHAR(8) NOT NULL,
-    usuario_id BIGINT NULL,
-    empresa_id BIGINT NULL,
 
-    CONSTRAINT FK_telefone_usuario
-        FOREIGN KEY (usuario_id)
-        REFERENCES usuario(id),
 
-    CONSTRAINT FK_telefone_empresa
+
+CREATE TABLE Empresa_telefone(
+    id BIGINT NOT NULL IDENTITY (1,1) PRIMARY KEY,
+    ddd VARCHAR(2) NOT NULL,
+    numero VARCHAR(9) NOT NULL,
+    empresa_id BIGINT NOT NULL,
+
+    CONSTRAINT FK_empresa_telefone
         FOREIGN KEY (empresa_id)
-        REFERENCES Empresas(id)
+        REFERENCES empresas(id),
 );
+GO
+
+
+CREATE TABLE Produto (
+    id BIGINT IDENTITY(1,1) PRIMARY KEY,
+    empresa_id BIGINT NOT NULL,
+    nome VARCHAR(45) NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
+    descricao VARCHAR(255) NULL
+
+        CONSTRAINT FK_produto_empresa
+        FOREIGN KEY(empresa_id)
+        REFERENCES empresas(id),
+    
+);
+GO
+
+CREATE TABLE Servico(
+    id BIGINT IDENTITY(1,1) PRIMARY KEY,
+    empresa_id BIGINT NOT NULL,
+    nome VARCHAR(45) NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
+    descricao VARCHAR(255) NULL
+
+    CONSTRAINT FK_servico_empresa
+        FOREIGN KEY(empresa_id)
+        REFERENCES empresas(id),
+);
+GO
+
+

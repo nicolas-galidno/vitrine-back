@@ -33,8 +33,8 @@ public class Empresas {
     @Column(length = 14, nullable = false)
     private String cnpj;
 
-    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
-    private List<Telefone> telefones;
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EmpresaTelefone> telefones;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
@@ -49,7 +49,7 @@ public class Empresas {
     @Column(length = 255, nullable = false)
     private String senha;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String logradouro;
 
 
@@ -92,11 +92,11 @@ public class Empresas {
         this.categoria = categoria;
     }
 
-    public List<Telefone> getTelefones() {
+    public List<EmpresaTelefone> getTelefones() {
         return telefones;
     }
 
-    public void setTelefones(List<Telefone> telefones) {
+    public void setTelefones(List<EmpresaTelefone> telefones) {
         this.telefones = telefones;
     }
 

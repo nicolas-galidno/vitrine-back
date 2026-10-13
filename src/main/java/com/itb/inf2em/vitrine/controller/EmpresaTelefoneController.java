@@ -1,8 +1,7 @@
 package com.itb.inf2em.vitrine.controller;
 
-import com.itb.inf2em.vitrine.model.entity.Telefone;
-import com.itb.inf2em.vitrine.model.repository.TelefoneRepository;
-import com.itb.inf2em.vitrine.model.services.TelefoneServices;
+import com.itb.inf2em.vitrine.model.entity.EmpresaTelefone;
+import com.itb.inf2em.vitrine.model.services.EmpresaTelefoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,28 +11,28 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/telefone")
-public class TelefoneController {
+@RequestMapping("/api/v1/empresa/telefone")
+public class EmpresaTelefoneController {
 
     @Autowired
-    private TelefoneServices telefoneServices;
+    private EmpresaTelefoneService empresaTelefoneService;
 
     @GetMapping
-    public ResponseEntity<List<Telefone>> findAll() {
+    public ResponseEntity<List<EmpresaTelefone>> findAll() {
 
-        return ResponseEntity.ok(telefoneServices.findAll());
+        return ResponseEntity.ok(empresaTelefoneService.findAll());
     }
 
     @PostMapping
-    public ResponseEntity<Telefone> salvarTelefone(@RequestBody Telefone telefone) {
-        Telefone newTelefone = telefoneServices.save(telefone);
+    public ResponseEntity<EmpresaTelefone> salvarTelefone(@RequestBody EmpresaTelefone telefone) {
+        EmpresaTelefone newTelefone = empresaTelefoneService.save(telefone);
         return ResponseEntity.status(HttpStatus.CREATED).body(newTelefone);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> findById(@PathVariable String id) {
         try {
-            return ResponseEntity.ok(telefoneServices.findById(Long.parseLong(id)));
+            return ResponseEntity.ok(empresaTelefoneService.findById(Long.parseLong(id)));
         } catch (NumberFormatException e) {
             return ResponseEntity.badRequest().body(
                     Map.of(
@@ -55,9 +54,9 @@ public class TelefoneController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateTelefone(@PathVariable String id, @RequestBody Telefone telefone) {
+    public ResponseEntity<Object> updateTelefone(@PathVariable String id, @RequestBody EmpresaTelefone telefone) {
         try {
-            return ResponseEntity.ok(telefoneServices.update(Long.parseLong(id), telefone));
+            return ResponseEntity.ok(empresaTelefoneService.update(Long.parseLong(id), telefone));
         } catch (NumberFormatException e) {
             return ResponseEntity.badRequest().body(
                     Map.of(
@@ -81,7 +80,7 @@ public class TelefoneController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteTelefone(@PathVariable String id) {
         try {
-            telefoneServices.delete(Long.parseLong(id));
+            empresaTelefoneService.delete(Long.parseLong(id));
             return ResponseEntity.ok().body(
                     Map.of(
                             "status", 200,

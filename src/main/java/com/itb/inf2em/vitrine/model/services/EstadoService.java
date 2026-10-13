@@ -16,7 +16,4 @@ public class EstadoService {
         return estadoRepository.findAll();
     }
 
-    public Estado save(Estado estado){
-        return estadoRepository.save(estado);
-    }
 }

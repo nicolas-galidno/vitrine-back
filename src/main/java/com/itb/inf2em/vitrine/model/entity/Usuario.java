@@ -1,10 +1,7 @@
 package com.itb.inf2em.vitrine.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
-import jakarta.persistence.metamodel.Type;
-import org.hibernate.annotations.Cascade;
 
 import java.util.List;
 
@@ -35,8 +32,8 @@ public class Usuario {
     @Column(length = 255, nullable = false)
     private String senha;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<Telefone> telefones;
+    @Embedded
+    private Telefone telefone;
 
     @Column(name = "cod_status", nullable = false)
     private boolean codStatus;
@@ -66,12 +63,12 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public List<Telefone> getTelefones() {
-        return telefones;
+    public Telefone getTelefone() {
+        return telefone;
     }
 
-    public void setTelefones(List<Telefone> telefones) {
-        this.telefones = telefones;
+    public void setTelefone(Telefone telefone) {
+        this.telefone = telefone;
     }
 
     public String getEmail() {

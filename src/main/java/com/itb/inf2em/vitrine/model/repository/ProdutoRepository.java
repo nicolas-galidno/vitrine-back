@@ -1,10 +1,9 @@
 package com.itb.inf2em.vitrine.model.repository;
 
-import com.itb.inf2em.vitrine.model.entity.Telefone;
+import com.itb.inf2em.vitrine.model.entity.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TelefoneRepository extends JpaRepository<Telefone, Long> {
-
+public interface ProdutoRepository  extends JpaRepository<Produto, Long> {
 }

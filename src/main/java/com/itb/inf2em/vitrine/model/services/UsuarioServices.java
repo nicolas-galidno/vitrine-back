@@ -1,6 +1,6 @@
 package com.itb.inf2em.vitrine.model.services;
 
-import com.itb.inf2em.vitrine.model.entity.Telefone;
+
 import com.itb.inf2em.vitrine.model.entity.Usuario;
 import com.itb.inf2em.vitrine.model.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +19,6 @@ public class UsuarioServices {
     }
 
     public Usuario save(Usuario usuario){
-        List<Telefone> telefones = usuario.getTelefones();
-        telefones.forEach(telefone -> {
-            telefone.setUsuario(usuario);
-        });
         usuario.setCodStatus(true);
         return usuarioRepository.save(usuario);
     }
@@ -37,14 +33,15 @@ public class UsuarioServices {
         usuarioExistente.setNome(usuario.getNome());
         usuarioExistente.setEmail(usuario.getEmail());
         usuarioExistente.setSenha(usuario.getSenha());
-        usuarioExistente.setTelefones(usuario.getTelefones());
+        usuarioExistente.setTelefone(usuario.getTelefone());
         usuarioExistente.setCodStatus(true);
         return usuarioRepository.save(usuarioExistente);
     }
 
-    public void delete(Long id){
-        Usuario usuarioExistente = findById(id);
-        usuarioRepository.deleteById(id);
+    public void delete(Long id) {
+        if (findById(id) != null) {
+            usuarioRepository.deleteById(id);
+        }
     }
 }
 
